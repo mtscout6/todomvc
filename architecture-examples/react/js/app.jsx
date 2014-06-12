@@ -8,7 +8,7 @@
 /*global React, Router*/
 var app = app || {};
 
-(function () {
+(function (window) {
 	'use strict';
 
 	app.ALL_TODOS = 'all';
@@ -19,7 +19,7 @@ var app = app || {};
 
 	var ENTER_KEY = 13;
 
-	var TodoApp = React.createClass({
+	app.TodoApp = React.createClass({
 		getInitialState: function () {
 			return {
 				nowShowing: app.ALL_TODOS,
@@ -93,12 +93,12 @@ var app = app || {};
 
 			var shownTodos = todos.filter(function (todo) {
 				switch (this.state.nowShowing) {
-				case app.ACTIVE_TODOS:
-					return !todo.completed;
-				case app.COMPLETED_TODOS:
-					return todo.completed;
-				default:
-					return true;
+					case app.ACTIVE_TODOS:
+						return !todo.completed;
+					case app.COMPLETED_TODOS:
+						return todo.completed;
+					default:
+						return true;
 				}
 			}, this);
 
@@ -167,16 +167,4 @@ var app = app || {};
 			);
 		}
 	});
-
-	var model = new app.TodoModel('react-todos');
-
-	function render() {
-		React.renderComponent(
-			<TodoApp model={model}/>,
-			document.getElementById('todoapp')
-		);
-	}
-
-	model.subscribe(render);
-	render();
-})();
+})(window);
