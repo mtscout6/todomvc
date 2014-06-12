@@ -8,7 +8,7 @@
 					instance;
 
 			beforeEach(function() {
-				model = new app.TodoModel("test-model");
+				model = sinon.stub(new app.TodoModel("test-model"));
 
 				instance = ReactTestUtils.renderIntoDocument(app.TodoApp({model: model}));
 			});
@@ -21,11 +21,11 @@
 				location.hash = '/';
 			});
 
-			it('should define TodoApp', function(){
+			it('should define TodoApp', function() {
 				expect(app.TodoApp).toBeTruthy();
 			});
 
-			it('should define default state', function(){
+			it('should define default state', function() {
 				expect(app.TodoApp.originalSpec.getInitialState()).toEqual({
 					nowShowing: 'all',
 					editing: null
@@ -45,10 +45,11 @@
 			});
 
 			it("pressing the enter key adds todo item and clears text field", function() {
-				instance.refs.newField.getDOMNode().value = 'test';
+				var itemText = "test item text";
+				instance.refs.newField.getDOMNode().value = itemText;
 				app.TodoApp.originalSpec.handleNewTodoKeyDown.bind(instance)({which: 13});
 
-				expect(model.todos.length).toBe(1);
+				expect(model.addTodo.calledWith(itemText)).toBe(true);
 				expect(instance.refs.newField.getDOMNode().value).toBe('');
 			});
 		});

@@ -14,6 +14,7 @@ module.exports = function (config) {
 			'js/todoItem.jsx',
 			'js/footer.jsx',
 			'js/app.jsx',
+			'test/lib/**/*.js',
 			'test/unit/**/*.js',
 			'test/unit/**/*.jsx'
 		],
