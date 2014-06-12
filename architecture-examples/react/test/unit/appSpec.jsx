@@ -1,3 +1,6 @@
+/**
+ * @jsx React.DOM
+ */
 /*global describe, it, beforeEach, inject, expect*/
 (function () {
 		'use strict';
@@ -5,12 +8,13 @@
 		describe('App', function() {
 			var ReactTestUtils = React.addons.TestUtils,
 					model,
-					instance;
+					instance,
+					TodoApp = app.TodoApp;
 
 			beforeEach(function() {
 				model = sinon.stub(new app.TodoModel("test-model"));
 
-				instance = ReactTestUtils.renderIntoDocument(app.TodoApp({model: model}));
+				instance = ReactTestUtils.renderIntoDocument(<TodoApp model={model} />);
 			});
 
 			afterEach(function() {
