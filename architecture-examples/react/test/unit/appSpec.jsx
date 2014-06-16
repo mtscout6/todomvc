@@ -11,7 +11,7 @@
 					instance,
 					flag,
 					TodoApp = app.TodoApp,
-			    mockFooter,
+					mockFooter,
 					mockComponent = function(component, mockTagName){
 						var reactClass = React.createClass({
 									render: function() {
