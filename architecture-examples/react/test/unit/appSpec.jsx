@@ -9,6 +9,7 @@
 			var ReactTestUtils = React.addons.TestUtils,
 					model,
 					instance,
+					flag,
 					TodoApp = app.TodoApp;
 
 			beforeEach(function() {
@@ -48,7 +49,7 @@
 				}, "is showing active", 10);
 			});
 
-			it("pressing the enter key adds todo item and clears text field", function() {
+			it('pressing the enter key adds todo item and clears text field', function() {
 				var itemText = "test item text";
 				instance.refs.newField.getDOMNode().value = itemText;
 				app.TodoApp.originalSpec.handleNewTodoKeyDown.bind(instance)({which: 13});
@@ -56,6 +57,29 @@
 				expect(model.addTodo.calledWith(itemText)).toBe(true);
 				expect(instance.refs.newField.getDOMNode().value).toBe('');
 			});
+
+			it('pressing other keys does nothing', function() {
+				var itemText = "test item text",
+						key = (function() {
+							var n = 13;
+							while (n === 13) n = Math.floor(Math.random() * 1000000);
+							return n;
+						}());
+
+				instance.refs.newField.getDOMNode().value = itemText;
+				app.TodoApp.originalSpec.handleNewTodoKeyDown.bind(instance)({which: key});
+
+				expect(model.addTodo.calledWith(itemText)).toBe(false);
+				expect(instance.refs.newField.getDOMNode().value).toBe(itemText);
+			});
+
+			for(flag in [true, false]) {
+				it("toggles all items checked status when checked " + flag, function(){
+					app.TodoApp.originalSpec.toggleAll.bind(instance)({target: { checked: flag }});
+					expect(model.toggleAll.calledWith(flag)).toBe(true)
+				});
+			}
+
 		});
 
 }());
