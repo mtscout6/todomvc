@@ -18,18 +18,9 @@
 										var mockTagName = mockTagName || "div";
 										return React.DOM[mockTagName](null, this.props.children);
 									}
-								});
-						var mock = sinon.stub(app, component, reactClass);
-
-						//var original = app[component];
-						//reactClass.restore = function() {
-							//app[component] = original;
-						//};
-
-						//mock.returns(reactClass);
+								}),
+								mock = sinon.stub(app, component, reactClass);
 						return mock;
-
-						//return reactClass;
 					};
 
 			beforeEach(function() {
