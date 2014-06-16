@@ -123,7 +123,7 @@ var app = app || {};
 
 			var completedCount = todos.length - activeTodoCount;
 
-			if (activeTodoCount || completedCount) {
+			if (todos.length) {
 				footer =
 					<TodoFooter
 						count={activeTodoCount}
