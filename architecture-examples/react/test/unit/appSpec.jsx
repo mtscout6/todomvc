@@ -80,6 +80,16 @@
 				});
 			}
 
+			it('can i mock a child component', function() {
+				model.todos = [{
+					id: app.Utils.uuid(),
+					title: 'test',
+					completed: false
+				}];
+
+				ReactTestUtils.mockComponent(app.TodoFooter)
+			});
+
 		});
 
 }());
