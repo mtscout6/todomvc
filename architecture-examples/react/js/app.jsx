@@ -14,8 +14,6 @@ var app = app || {};
 	app.ALL_TODOS = 'all';
 	app.ACTIVE_TODOS = 'active';
 	app.COMPLETED_TODOS = 'completed';
-	var TodoFooter = app.TodoFooter;
-	var TodoItem = app.TodoItem;
 
 	var ENTER_KEY = 13;
 
@@ -90,6 +88,8 @@ var app = app || {};
 			var footer;
 			var main;
 			var todos = this.props.model.todos;
+			var TodoFooter = app.TodoFooter;
+			var TodoItem = app.TodoItem;
 
 			var shownTodos = todos.filter(function (todo) {
 				switch (this.state.nowShowing) {
